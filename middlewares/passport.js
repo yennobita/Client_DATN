@@ -47,6 +47,7 @@ passport.serializeUser(async function (user, done) {
             email: user.email,
             name: user.name,
             address: user.address,
+            phonenumber: user.phonenumber,
             id: user._id,
             status: user.status,
         });

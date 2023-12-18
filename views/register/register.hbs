@@ -21,6 +21,11 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
+<style>
+  .input-error {
+  border: 1px solid red;
+}
+</style>
 
 <body>
 
@@ -76,20 +81,23 @@
             {{/if}}
 
             <div class="form-group">
-              <input type="text" class="form-input" name="name" id="name" placeholder="Họ Và Tên" required />
+              <input type="text" class="form-input {{#if error.name}}input-error{{/if}}" name="name" id="name" placeholder="Họ Và Tên" required
+                value="{{formData.name}}"/>
             </div>
             <div class="form-group">
-              <input type="email" class="form-input" name="email" id="email" placeholder="Email" required />
+              <input type="email" class="form-input {{#if error.email}}input-error{{/if}}" name="email" id="email" placeholder="Email" required
+                value="{{formData.email}}" />
             </div>
             <div class="form-group">
-              <input type="text" class="form-input" name="address" id="address" placeholder="Địa Chỉ" required />
+              <input type="text" class="form-input {{#if error.address}}input-error{{/if}}" name="address" id="address" placeholder="Địa Chỉ" required
+                value="{{formData.address}}"  />
             </div>
             <div class="form-group">
-              <input type="number" class="form-input" name="phonenumber" id="phonenumber" placeholder="Số điện thoại"
-                required />
+              <input type="number" class="form-input {{#if error.phonenumber}}input-error{{/if}}" name="phonenumber" id="phonenumber" placeholder="Số điện thoại"
+                required  value="{{formData.phonenumber}}" />
             </div>
             <div class="form-group">
-              <input type="text" class="form-input" name="password" id="password" placeholder="Mật Khẩu" required />
+              <input type="password" class="form-input" name="password" id="password" placeholder="Mật Khẩu" required />
               <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
             </div>
 

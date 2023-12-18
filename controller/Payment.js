@@ -29,14 +29,18 @@ function homePost(req, res) {
 }
 
 function postPayment(req, res) {
+  const discount = req.body.discount
   const sumPrice = req.body.sumPrice;
-  console.log("tongtien", sumPrice);
+  const sumtt = sumPrice - discount
+  console.log("tongtien", sumtt);
+  console.log("discount", discount);
+  console.log("sumPrice", sumPrice);
   if (typeof sumPrice === "undefined" || sumPrice === null) {
     return res.status(400).send("Tổng tiền không khả dụng");
   }
 
-  const exchangeRate = 23000;
-  const totalInUSD = (sumPrice / exchangeRate).toFixed(2);
+  const exchangeRate = 24000;
+  const totalInUSD = (sumtt / exchangeRate).toFixed(2);
   console.log(totalInUSD);
   if (parseFloat(totalInUSD) === 0) {
     console.error("Giá trị totalInUSD không hợp lệ (bằng 0).");
@@ -95,48 +99,48 @@ async function successPayment(req, res) {
     let sumPrice = 0;
     for await (let idProductOrder of shoppingCart.listProductOrder) {
       let productOrder = await ProductOrder.findById(idProductOrder).lean();
-
+  
       productOrder.sumPriceProduct =
         productOrder.quantity * productOrder.unitPrice;
       sumPrice += productOrder.sumPriceProduct;
       listProductOrder.push(productOrder);
     }
-
-    //
+  
+  // 
+  console.log("chạy tới đây rồi")
     const shoppingCartUser = await ShoppingCart.findById(user.idShoppingCart);
     if (shoppingCartUser.listProductOrder.length <= 0) {
       return res.redirect("/checkout?errorListProduct=errorListProduct");
     }
-
+  
     const newCheckOut = new CheckOut({
       email: req.user.email,
       numberPhone: numberPhone,
       idShoppingCart: user.idShoppingCart,
       note: note,
-      status: "Delivering",
+      status: "Pending",
     });
-
+  
     await newCheckOut.save();
-
-    const newShoppingCart = new ShoppingCart({
-      listProductOrder: [],
-      status: false,
-      purchasedTime: new Date().toISOString(),
-    });
-
-    await newShoppingCart.save();
-
-    await User.findOneAndUpdate(
-      { email: req.user.email },
-      {
-        idShoppingCart: newShoppingCart._id,
-        $addToSet: {
-          listIdShoppingCartHistory: user.idShoppingCart,
-        },
-      }
-    );
-
-    return res.redirect("/home");
+  
+    const newCart = await new ShoppingCart({ 
+      listProductOrder: []
+     }).save();
+  
+     console.log(newCart)
+  
+    await shoppingCartUser.save();
+  
+  // await ShoppingCart.findByIdAndUpdate(user.idShoppingCart, { listProductOrder: [] });
+  
+  // user.idShoppingCart = newShoppingCart._id;
+  
+  user.listIdShoppingCartHistory.push(user.idShoppingCart);
+  user.idShoppingCart = newCart._id;
+  
+  await user.save();
+  return res.redirect("/home?paymentSuccess=true");
+    
   } catch (error) {
     console.log(error);
     return res.status(500).json({ result: "failed", message: error.message });
@@ -166,7 +170,7 @@ function createPaymentUrl(req, res, next) {
   let vnpUrl = appconfig.vnp_Url;
   let returnUrl = appconfig.vnp_ReturnUrl;
   let orderId = moment(date).format("DDHHmmss");
-  let amount = req.body.sumPrice;
+  let amount = req.body.sumPrice - req.body.discount;
   let bankCode = req.body.bankCode || "";
   let locale = req.body.language;
   // if (locale === null || locale === "") {
@@ -328,7 +332,7 @@ async function vnpayReturn(req, res, next) {
       numberPhone: numberPhone,
       idShoppingCart: user.idShoppingCart,
       note: note,
-      status: "Delivering",
+      status: "Pending",
     });
   
     await newCheckOut.save();

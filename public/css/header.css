@@ -43,8 +43,16 @@
 }
 
 .mid-header .logo-wrapper {
-  max-width: 248px;
+  max-width: 104px;
   display: block;
+}
+#logo {
+  margin-left: 100%;
+}
+@media (max-width: 1366px) {
+  #logo {
+    margin-left: 0%;
+  }
 }
 .mid-header .toggle-nav {
   width: 24px;

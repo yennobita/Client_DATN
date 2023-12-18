@@ -120,6 +120,13 @@ ol {
   Helper CSS
 -----------------------*/
 
+.slide-show-product {
+}
+@media (max-width: 1366px) {
+  .slide-show-produc {
+    margin-top: 100%;
+  }
+}
 .section-title {
   margin-bottom: 50px;
   text-align: center;

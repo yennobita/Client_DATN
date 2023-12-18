@@ -262,7 +262,7 @@
                                             <input type="hidden" name="productId" value="{{this.idProduct}}">
                                             {{#unless ../user}}
                                             <div class="alert alert-warning" role="alert">
-                                                Bạn vui lòng đăng nhập để đánh giá sản phẩm
+                                                Bạn vui lòng đăng nhập để xem và đánh giá sản phẩm
                                             </div>
                                             {{/unless}}
                                         </div>
@@ -271,7 +271,7 @@
 
                             </form>
                             <br>
-                            <h6>Đánh giá</h6>
+                            <h4 style="padding-bottom: 10px;">ĐÁNH GIÁ SẢN PHẨM</h4>
 
                             <div id="ratings">
 
@@ -572,11 +572,11 @@
     var selectedSize = $('input[name="size"]:checked').val();
     var selectedColor = $('input[name="color"]:checked').val();
     if (!selectedSize) {
-        toastr.warning("Vui lòng chọn Size!")
+        toastr.warning("Vui lòng chọn kích thước!")
         return;
     }
     if (!selectedColor) {
-        toastr.warning("Vui lòng chọn Color!")
+        toastr.warning("Vui lòng chọn màu!")
         return;
     }
     if (numProductOder <= 0) {

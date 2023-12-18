@@ -91,46 +91,44 @@
                                         Toán Khi Nhận Hàng</button>
 
                                 </div>
-                                <div class="paymentt_online" style="margin-top: 10px;">
-                                    <ul>
-                                        <li class="Payment">
-                                            <div class="payment_online">
-                                                <div class="name">
-                                                    <h2
-                                                        style="font-size: 14px; color:#ffffff; text-align:center; cursor:pointer">
-                                                        THANH TOÁN ONLINE
-                                                    </h2>
-                                                </div>
-                                            </div>
-                                            <div class="payment_dropdown">
-                                                <form id="paymentForm" action="/pay" method="POST"
-                                                    style="margin-bottom: 15px;">
-                                                    <input type="hidden" id="sumPriceInput" name="sumPrice"
-                                                        value="{{sumPrice}}">
-                                                    <button type="submit" onclick="postCheckout()">Thanh Toán Bằng
-                                                        Paypal</button>
-                                                </form>
-                                                <form id="paymentForm" action="/create_payment_url" method="POST"
-                                                    enctype="application/x-www-form-urlencoded"
-                                                    style="padding-bottom: 10px;">
-                                                    <input type="hidden" id="sumPriceInput" name="sumPrice"
-                                                        value="{{sumPrice}}">
-                                                    <button type="submit" onclick="postCheckout()">Thanh Toán Bằng
-                                                        VnPay</button>
-                                                </form>
-                                            </div>
-                                        </li>
-                                    </ul>
 
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
             </form>
+            <div class="paymentt_online" style="margin-top: 10px;">
+                <ul>
+                    <li class="Payment">
+                        <div class="payment_online">
+                            <div class="name">
+                                <h2 style="font-size: 14px; color:#ffffff; text-align:center; cursor:pointer">
+                                    THANH TOÁN ONLINE
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="payment_dropdown">
+                            <form id="paymentForm" action="/pay" method="POST" style="margin-bottom: 15px;">
+                                <input type="hidden" id="discountInput" name="discount" value="{{discount}}">
+                                <input type="hidden" id="sumPriceInput" name="sumPrice" value="{{sumPrice}}">
+                                <button type="submit" onclick="postCheckout()">Thanh Toán Bằng
+                                    Paypal</button>
+                            </form>
+                            <form id="paymentForm" action="/create_payment_url" method="POST"
+                                enctype="application/x-www-form-urlencoded" style="padding-bottom: 10px;">
+                                <input type="hidden" id="discountInput" name="discount" value="{{discount}}">
+                                <input type="hidden" id="sumPriceInput" name="sumPrice" value="{{sumPrice}}">
+                                <button type="submit" onclick="postCheckout()">Thanh Toán Bằng
+                                    VnPay</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
         </div>
+
+    </div>
+    </div>
+    </div>
+
+    </div>
     </div>
 </section>
 

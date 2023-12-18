@@ -17,12 +17,29 @@
   border: 1px solid #fff;
   margin: 0 5px;
   transition: 0.2s ease-in-out;
+  border-radius: 50%;
 }
 .pagination__item.is-current,
 .pagination__item:hover {
   background-color: #fff;
+  border-radius: 50%;
 }
-
+@media (max-width: 1366px) {
+  .pagination {
+    margin-top: 50%;
+  }
+}
+@media (max-width: 1366px) {
+  .slideshow {
+    height: auto;
+  }
+}
+@media (max-width: 1366px) {
+  .slideshow__slide-background-load-wrap {
+    height: 465px;
+    width: 100%;
+  }
+}
 @media (max-width: 699px) {
   .container {
     padding-right: 40px;
@@ -48,7 +65,7 @@
 }
 .slideshow {
   color: #ffffff;
-  background-color: #1e1e22;
+  background-color: none;
   overflow: hidden;
   height: 90vh;
   min-height: 400px;
@@ -95,10 +112,15 @@
 .slideshow__slide.is-prev-section .slideshow__slide-background-parallax,
 .slideshow__slide.is-next-section .slideshow__slide-background-parallax {
   transform: none !important;
+  max-width: 100%;
+  height: auto;
+
 }
 .slideshow__slide-background-load {
   transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translate3d(0, -50%, 0);
+  width: 100%;
+  height: auto;
 }
 .is-loaded .slideshow__slide-background-load {
   transform: translate3d(0, 0, 0);
@@ -155,6 +177,8 @@
 .slideshow__slide-image {
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 1.5s;
   transform: scale(1);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
 }
 .slideshow__slide.is-prev .slideshow__slide-image,
 .slideshow__slide.is-next .slideshow__slide-image {
@@ -1681,10 +1705,19 @@ body[data-route-option="next-section"] .c-header-home_buttons {
 
 
 /* header */
-#header .header-middle.v1.show_banner .right-header-middle-content{width:13%;float:right}
-#header .header-middle.v1.show_banner .left-header-middle-content {width:17%;}
-#header .header-middle.v1.show_banner .middle-header-middle-content{width:70%;text-align:left;padding:20px 20px 10px 50px;float:left;}
-
+#header .header-middle.v1.show_banner .right-header-middle-content {
+  width: 13%;
+  float: right;
+}
+#header .header-middle.v1.show_banner .left-header-middle-content {
+  width: 17%;
+}
+#header .header-middle.v1.show_banner .middle-header-middle-content {
+  width: 70%;
+  text-align: left;
+  padding: 20px 20px 10px 50px;
+  float: left;
+}
 /* Widget Title */
 #left-sidebar .widget_title_wrapper {
   	background-color: red;
@@ -1761,4 +1794,16 @@ body[data-route-option="next-section"] .c-header-home_buttons {
 }
 .porto-links-block li.porto-links-item i {
     margin-right: 5px;
+}
+/* slider */
+.slideshow__slide-background-load {
+
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 900px) {
+  .slideshow__slide-background-load {
+    width: 100%;
+    height: auto;
+  }
 }

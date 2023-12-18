@@ -19,7 +19,7 @@ module.exports = {
     const formattedBlogs = blogs.map((blog) => {
       const truncatedContent =
         blog.content.length > 200
-          ? blog.content.slice(0, 200) + "..."
+          ? blog.content.replace(/(<([^>]+)>)/gi, "").slice(0, 200) + "..."
           : blog.content;
       const formattedDate = format(blog.date, "dd-MM-yyyy");
       return {
